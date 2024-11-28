@@ -1,0 +1,265 @@
+/* Basic Styles */
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 15px 4%;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+
+  ul {
+    flex: 1;
+    list-style: none;
+    text-align: center;
+    
+  }
+  
+  ul li {
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+ /* General Navigation Link Styling */
+.n-link {
+  position: relative;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 15px;
+  padding: 5px 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Light Theme Styling */
+.light .n-link {
+  color: #000; /* Black text for light mode */
+}
+
+.light .n-link:hover {
+  color: #444; /* Darker gray for hover in light mode */
+}
+
+.light .n-link.active {
+  color: #0056b3; /* Blue for active link in light mode */
+}
+
+/* Dark Theme Styling */
+.dark .n-link {
+  color: #e8d4d4; /* Soft white for dark mode */
+}
+
+.dark .n-link:hover {
+  color: #f1f2f7; /* Brighter white for hover in dark mode */
+}
+
+.dark .n-link.active {
+  color: #42aaff; /* Light blue for active link in dark mode */
+}
+
+/* Common Hover Effect */
+.n-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #f00202; /* Border color for hover */
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.n-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.n-link.active::after {
+  width: 100%;
+  left: 0;
+  background-color: #0056b3; /* Match active color in light mode */
+}
+
+
+
+  .toggle-icon {
+    width: 40px;
+    cursor: pointer;
+    margin-left: 40px;
+  }
+  
+  
+  /* Dark Theme Styles */
+  .dark .navbar {
+    background: #000;
+    color: white;
+  }
+  
+  .dark .search-box {
+    background: #fff;
+  }
+  
+  .dark .search-box input {
+    color: #222;
+  }
+  
+  .dark .search-box input::placeholder {
+    color: #222;
+  }
+  
+  /* Hamburger Menu */
+  .hamburger-icon {
+    display: none;
+    width: 30px;
+    cursor: pointer;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+    gap: 10px; /* Add some space between logo and text */
+  }
+  
+  .logo {
+    width: 55px; /* Adjust to the desired size */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer;
+  }
+  .logo-text {
+    font-size: 24px; /* Adjust font size for the name */
+    font-weight: bold; /* Make it stand out */
+    color: inherit; /* Inherit color based on theme */
+    margin-left: 5px;
+  }
+
+  .logout-icon {
+    width: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .logout-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .nav-links .active {
+    color: blue; /* Or any other style for active links */
+    font-weight: bold;
+  }
+
+  .profile-section {
+    position: relative;
+    display: inline-block;
+    margin-left: 2rem;
+  }
+  
+  .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .profile-name,
+  .profile-email {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .logout-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    background: rgb(50, 99, 235);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background: darkred;
+  }
+  
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .hamburger-icon {
+      display: block;
+      margin-left: 42%;
+    }
+  
+    ul {
+      display: none;
+      position: absolute;
+      top: 95px;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      transform: translateY(-100%);
+    }
+  
+    ul.open {
+      display: flex;
+      transform: translateY(0);
+    }
+  
+    ul li {
+      margin: 15px 0;
+    }
+  
+    .dark ul {
+      background: #000;
+      color: white;
+    }
+  
+    .search-box {
+      display: none; /* Hide search box on smaller screens */
+    }
+  
+    .toggle-icon {
+      
+      margin-left: auto;
+      width: 40px;
+    }
+
+    .logo-container {
+        flex-direction: column; /* Stack logo and text vertically */
+        align-items: flex-start; /* Align them to the start */
+      }
+    
+      .logo-text {
+        font-size: 20px; /* Adjust text size for smaller screens */
+      }
+
+      .logo {
+        width: 80px; /* Smaller size for mobile */
+      }
+
+      
+  }
+  

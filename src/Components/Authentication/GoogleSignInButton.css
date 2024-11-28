@@ -1,0 +1,17 @@
+.google-sign-in-button {
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .google-sign-in-button:hover {
+    background-color: #357ae8;
+  }
+  
