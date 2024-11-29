@@ -5,7 +5,7 @@ from flask_cors import CORS
 import logging
 
 # Initialize Firebase
-cred = credentials.Certificate("react-01.json")
+cred = credentials.Certificate("#.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
