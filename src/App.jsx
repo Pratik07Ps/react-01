@@ -59,9 +59,9 @@ const App = () => {
       ) : (
         <div className="auth-page">
           {isRegistering ? (
-            <RegisterPage onRegister={() => setIsRegistering(false)} />
+            <RegisterPage onRegister={handleRegister} onSwitchToLogin={toggleAuthMode} />
           ) : (
-            <LoginPage onLogin={handleLogin} onSwitchToRegister={() => setIsRegistering(true)} />
+            <LoginPage onLogin={handleLogin} onSwitchToRegister={toggleAuthMode} />
           )}
         </div>
       )}

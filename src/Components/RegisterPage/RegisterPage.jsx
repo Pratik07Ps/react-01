@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import GoogleSignInButton from '../Authentication/GoogleSignInButton'; // Import GoogleSignInButton
 import './RegisterPage.css';
 
 const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
@@ -91,11 +90,7 @@ const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
             Login here
           </a>
         </p>
-
-        
       </div>
     </div>
   );
 };
-
-export default RegisterPage;
