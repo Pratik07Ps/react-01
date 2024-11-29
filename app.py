@@ -2,6 +2,7 @@ from flask import Flask, session, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, firestore
 from flask_cors import CORS
+import logging
 
 # Initialize Firebase
 cred = credentials.Certificate("react-01.json")
@@ -87,21 +88,23 @@ def google_login():
     name = data.get('name')
     uid = data.get('uid')
 
+    logging.info(f"Received Google login request: {data}")
+
     try:
         users_ref = db.collection('users')
         query = users_ref.where('email', '==', email).stream()
+        user_exists = any(query)
 
-        # If user does not exist, create a new one
-        if not any(query):
-            users_ref.add({
-                'email': email,
-                'name': name,
-                'uid': uid,
-            })
+        if not user_exists:
+            logging.info("User does not exist. Creating a new user.")
+            users_ref.add({'email': email, 'name': name, 'uid': uid})
+        else:
+            logging.info("User already exists.")
+
         return jsonify({"success": True, "message": "Google login successful!"})
     except Exception as e:
+        logging.error(f"Error during Google login: {e}")
         return jsonify({"success": False, "message": str(e)}), 500
-
 
 # Route to handle logout
 @app.route('/logout', methods=['POST'])

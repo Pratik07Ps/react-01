@@ -18,15 +18,14 @@ const LoginPage = ({ onLogin, onSwitchToRegister }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      if (data.success) {
-        onLogin(data.user); // Call a function to handle successful login
-        setErrorMessage(''); // Clear any previous error messages
+      if (response.ok) {
+        onLogin(data.user); // Login successful
       } else {
-        setErrorMessage(data.message); // Set the error message if login fails
+        setErrorMessage(data.message); // Handle errors
       }
     } catch (error) {
       console.error('Error during Flask login:', error);
-      setErrorMessage('An error occurred with Flask login. Please try again later.');
+      setErrorMessage('Unable to connect to the server.');
     }
   };
 

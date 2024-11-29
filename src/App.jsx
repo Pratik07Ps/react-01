@@ -10,17 +10,20 @@ import './App.css';
 const App = () => {
   const current_theme = localStorage.getItem('current_theme');
   const [theme, setTheme] = useState(current_theme ? current_theme : 'light');
-  const [user, setUser] = useState(null);
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [user, setUser] = useState(null); // Tracks the logged-in user
+  const [isRegistering, setIsRegistering] = useState(false); // Toggle between login and registration modes
 
+  // Handle user login
   const handleLogin = (userData) => {
-    setUser(userData); // Store user data after successful login
+    setUser(userData); // Set user state upon successful login
   };
 
+  // Handle user registration
   const handleRegister = () => {
-    setIsRegistering(false);
+    setIsRegistering(false); // Switch to login page after registration
   };
-  
+
+  // Handle user logout
   const handleLogout = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/logout', {
@@ -38,10 +41,12 @@ const App = () => {
     }
   };
 
+  // Toggle between Login and Register pages
   const toggleAuthMode = () => {
     setIsRegistering((prevState) => !prevState);
   };
 
+  // Persist the current theme to local storage
   useEffect(() => {
     localStorage.setItem('current_theme', theme);
   }, [theme]);
@@ -49,6 +54,7 @@ const App = () => {
   return (
     <div className={`container ${theme}`}>
       {user ? (
+        // Render the authenticated section with Navbar and Routes
         <BrowserRouter>
           <Navbar theme={theme} setTheme={setTheme} onLogout={handleLogout} user={user} />
           <Routes>
@@ -57,6 +63,7 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       ) : (
+        // Render the authentication page (Login or Register)
         <div className="auth-page">
           {isRegistering ? (
             <RegisterPage onRegister={handleRegister} onSwitchToLogin={toggleAuthMode} />

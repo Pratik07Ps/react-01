@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import GoogleSignInButton from '../Authentication/GoogleSignInButton'; // Import GoogleSignInButton
 import './RegisterPage.css';
 
 const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
@@ -11,35 +12,41 @@ const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (password !== confirmPassword) {
       setError("Passwords don't match!");
       return;
     }
-
-    setError(null); // Reset error state
-    setLoading(true); // Set loading state to true
-
+  
+    setError(null);
+    setLoading(true);
+  
+    console.log('Sending data to backend:', { name, email, password });
+  
     try {
       const response = await fetch('http://127.0.0.1:5000/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
       });
-
+  
       const data = await response.json();
+      console.log('Backend Response:', data);
+  
       if (data.success) {
         alert('Registration successful!');
-        onRegister(); // Navigate to login or home page
+        onRegister();
       } else {
         setError(data.message || 'Registration failed!');
       }
     } catch (error) {
+      console.error('Error during registration:', error);
       setError('An error occurred while registering. Please try again later.');
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
+  
 
   return (
     <div className="auth-container">
@@ -90,7 +97,11 @@ const RegisterPage = ({ onRegister, onSwitchToLogin }) => {
             Login here
           </a>
         </p>
+
+        
       </div>
     </div>
   );
 };
+
+export default RegisterPage;
